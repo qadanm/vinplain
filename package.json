@@ -1,7 +1,7 @@
 {
   "name": "vinplain",
-  "version": "0.2.0",
-  "description": "The public record, in plain code. Typed, keyless access to US vehicle data: VIN decode, NHTSA recalls, complaints, crash ratings, and EPA fuel economy.",
+  "version": "0.2.1",
+  "description": "Typed, keyless access to US vehicle data: VIN decode, NHTSA recalls, complaints, crash ratings, and EPA fuel economy.",
   "license": "MIT",
   "private": false,
   "type": "module",

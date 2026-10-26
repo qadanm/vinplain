@@ -1,58 +1,67 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 360" width="880" height="360" role="img" aria-labelledby="tD dD">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 380" width="880" height="380" role="img" aria-labelledby="tD dD">
 <title id="tD">vinplain</title>
-<desc id="dD">The public record, in plain code. A typed, keyless TypeScript client for VIN decode, NHTSA recalls, complaints, crash ratings, and EPA fuel economy.</desc>
-<defs>
-  <linearGradient id="bgD" x1="0" y1="0" x2="1" y2="1">
-    <stop offset="0" stop-color="#08090A"/><stop offset="1" stop-color="#0E1420"/>
-  </linearGradient>
-  <radialGradient id="glowD" cx="50%" cy="50%" r="50%">
-    <stop offset="0" stop-color="#1D4ED8" stop-opacity="0.20"/><stop offset="1" stop-color="#1D4ED8" stop-opacity="0"/>
-  </radialGradient>
-</defs>
-<rect width="880" height="360" rx="20" fill="url(#bgD)"/>
-<circle cx="120" cy="20" r="210" fill="url(#glowD)"/>
-<rect x="1" y="1" width="878" height="358" rx="19" fill="none" stroke="#1F2937" stroke-opacity="0.8"/>
-<rect x="40.0" y="58.0" width="18" height="10" rx="1" fill="#FAFAF7" opacity="0.55"/>
-<rect x="88.0" y="58.0" width="18" height="10" rx="1" fill="#FAFAF7" opacity="0.55"/>
-<rect x="136.0" y="58.0" width="18" height="10" rx="1" fill="#FAFAF7" opacity="0.55"/>
-<rect x="184.0" y="58.0" width="18" height="10" rx="1" fill="#FAFAF7" opacity="0.55"/>
-<rect x="232.0" y="58.0" width="18" height="10" rx="1" fill="#FAFAF7" opacity="0.55"/>
-<rect x="280.0" y="58.0" width="18" height="10" rx="1" fill="#FAFAF7" opacity="0.55"/>
-<rect x="328.0" y="58.0" width="18" height="10" rx="1" fill="#FAFAF7" opacity="0.55"/>
-<rect x="376.0" y="58.0" width="18" height="10" rx="1" fill="#FAFAF7" opacity="0.55"/>
-<rect x="424.0" y="44.0" width="18" height="24" rx="1" fill="#D9FF3D" opacity="1"/>
-<rect x="472.0" y="58.0" width="18" height="10" rx="1" fill="#FAFAF7" opacity="0.55"/>
-<rect x="520.0" y="58.0" width="18" height="10" rx="1" fill="#FAFAF7" opacity="0.55"/>
-<rect x="568.0" y="58.0" width="18" height="10" rx="1" fill="#FAFAF7" opacity="0.55"/>
-<rect x="616.0" y="58.0" width="18" height="10" rx="1" fill="#FAFAF7" opacity="0.55"/>
-<rect x="664.0" y="58.0" width="18" height="10" rx="1" fill="#FAFAF7" opacity="0.55"/>
-<rect x="712.0" y="58.0" width="18" height="10" rx="1" fill="#FAFAF7" opacity="0.55"/>
-<rect x="760.0" y="58.0" width="18" height="10" rx="1" fill="#FAFAF7" opacity="0.55"/>
-<rect x="808.0" y="58.0" width="18" height="10" rx="1" fill="#FAFAF7" opacity="0.55"/>
-<text x="40" y="114" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="8.5" letter-spacing="2.4" fill="#9CA3AF">PUBLIC VEHICLE RECORDS / US</text>
-<text x="840" y="114" text-anchor="end" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="8.5" letter-spacing="2.4" fill="#9CA3AF">V0.2 / MIT</text>
-<text x="36" y="182" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="76" font-weight="700" letter-spacing="-4" fill="#FAFAF7">vinplain<span fill="#6EA8FF">.</span></text>
-<text x="40" y="220" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="24" letter-spacing="-0.5" fill="#FAFAF7">The public record, in plain code.</text>
-<text x="41" y="246" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="12" fill="#9CA3AF">VIN decode, recalls, complaints, crash ratings, and fuel economy.</text>
-<text x="41" y="263" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="12" fill="#9CA3AF">No API key. No black box. No per-lookup fee.</text>
-<g font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="8.5" letter-spacing="1.3">
-  <rect x="41" y="280" width="96" height="22" rx="11" fill="#111318" stroke="#242A36"/><text x="89" y="294" text-anchor="middle" fill="#6EA8FF">NO API KEY</text>
-  <rect x="145" y="280" width="142" height="22" rx="11" fill="#111318" stroke="#242A36"/><text x="216" y="294" text-anchor="middle" fill="#6EA8FF">ZERO RUNTIME DEPS</text>
-  <rect x="295" y="280" width="52" height="22" rx="11" fill="#111318" stroke="#242A36"/><text x="321" y="294" text-anchor="middle" fill="#6EA8FF">MIT</text>
-</g>
-<rect x="516" y="40" width="324" height="286" rx="14" fill="#020305"/>
-<circle cx="538" cy="62" r="4" fill="#F87171"/><circle cx="552" cy="62" r="4" fill="#FBBF24"/><circle cx="566" cy="62" r="4" fill="#34D399"/>
-<text x="538" y="92" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="8.5" letter-spacing="1.5" fill="#8B93A7">TERMINAL</text>
-<text x="538" y="124" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="10.5" fill="#D9FF3D">$ npx vinplain 1HGCM82633A004352</text>
-<line x1="538" y1="138" x2="818" y2="138" stroke="#8B93A7" stroke-opacity="0.25"/>
-<text x="538" y="164" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#F8FAFC">2003 Honda Accord EX-V6</text>
-<text x="538" y="190" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="9.5" fill="#8B93A7">VIN          1HGCM82633A004352</text>
-<text x="538" y="208" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="9.5" fill="#8B93A7">Recalls      24 campaigns</text>
-<text x="538" y="226" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="9.5" fill="#8B93A7">Complaints   2013</text>
-<text x="538" y="244" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="9.5" fill="#8B93A7">Fuel         22 mpg combined</text>
-<text x="538" y="262" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="9.5" fill="#8B93A7">Safety       unavailable</text>
-<circle cx="542" cy="292" r="4" fill="#D9FF3D"/>
-<text x="554" y="295" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="8.5" fill="#D9FF3D">STATUS OK</text>
-<text x="818" y="295" text-anchor="end" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="8" fill="#8B93A7">NO KEY</text>
-<text x="40" y="338" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="8" letter-spacing="1.6" fill="#9CA3AF">17 CHARACTERS / 9TH IS THE CHECK DIGIT</text>
+<desc id="dD">A public vehicle record: the 17-character VIN 1HGCM82633A004352 with the check digit at position nine marked in red, followed by the decoded 2003 Honda Accord record, 24 recall campaigns, 2013 complaints, and 22 mpg combined.</desc>
+<rect width="880" height="380" fill="#0B0C0D"/>
+<rect x="20" y="20" width="840" height="340" fill="none" stroke="#2A2D31" stroke-width="1"/>
+<text x="40" y="42" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="8" letter-spacing="2.2" fill="#9CA1A7">VINPLAIN / PUBLIC RECORD</text>
+<text x="840" y="42" text-anchor="end" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="8" letter-spacing="2.2" fill="#9CA1A7">V0.2 / MIT</text>
+<text x="36" y="126" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="72" font-weight="700" letter-spacing="-4.5" fill="#F2F2EF">vinplain</text>
+<text x="40" y="158" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="20" letter-spacing="-0.3" fill="#F2F2EF">Public vehicle records for TypeScript.</text>
+<text x="40" y="180" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="11.5" fill="#9CA1A7">VIN decode, recalls, complaints, crash ratings, and fuel economy.</text>
+<rect x="40" y="196" width="42" height="42" fill="#141618" stroke="#2A2D31" stroke-width="1"/>
+<text x="61.0" y="223" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="17" fill="#F2F2EF">1</text>
+<rect x="86" y="196" width="42" height="42" fill="#141618" stroke="#2A2D31" stroke-width="1"/>
+<text x="107.0" y="223" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="17" fill="#F2F2EF">H</text>
+<rect x="132" y="196" width="42" height="42" fill="#141618" stroke="#2A2D31" stroke-width="1"/>
+<text x="153.0" y="223" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="17" fill="#F2F2EF">G</text>
+<rect x="178" y="196" width="42" height="42" fill="#141618" stroke="#2A2D31" stroke-width="1"/>
+<text x="199.0" y="223" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="17" fill="#F2F2EF">C</text>
+<rect x="224" y="196" width="42" height="42" fill="#141618" stroke="#2A2D31" stroke-width="1"/>
+<text x="245.0" y="223" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="17" fill="#F2F2EF">M</text>
+<rect x="270" y="196" width="42" height="42" fill="#141618" stroke="#2A2D31" stroke-width="1"/>
+<text x="291.0" y="223" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="17" fill="#F2F2EF">8</text>
+<rect x="316" y="196" width="42" height="42" fill="#141618" stroke="#2A2D31" stroke-width="1"/>
+<text x="337.0" y="223" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="17" fill="#F2F2EF">2</text>
+<rect x="362" y="196" width="42" height="42" fill="#141618" stroke="#2A2D31" stroke-width="1"/>
+<text x="383.0" y="223" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="17" fill="#F2F2EF">6</text>
+<rect x="408" y="196" width="42" height="42" fill="#FF4D3D" stroke="#FF4D3D" stroke-width="1"/>
+<text x="429.0" y="223" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="17" fill="#0B0C0D">3</text>
+<rect x="454" y="196" width="42" height="42" fill="#141618" stroke="#2A2D31" stroke-width="1"/>
+<text x="475.0" y="223" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="17" fill="#F2F2EF">3</text>
+<rect x="500" y="196" width="42" height="42" fill="#141618" stroke="#2A2D31" stroke-width="1"/>
+<text x="521.0" y="223" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="17" fill="#F2F2EF">A</text>
+<rect x="546" y="196" width="42" height="42" fill="#141618" stroke="#2A2D31" stroke-width="1"/>
+<text x="567.0" y="223" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="17" fill="#F2F2EF">0</text>
+<rect x="592" y="196" width="42" height="42" fill="#141618" stroke="#2A2D31" stroke-width="1"/>
+<text x="613.0" y="223" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="17" fill="#F2F2EF">0</text>
+<rect x="638" y="196" width="42" height="42" fill="#141618" stroke="#2A2D31" stroke-width="1"/>
+<text x="659.0" y="223" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="17" fill="#F2F2EF">4</text>
+<rect x="684" y="196" width="42" height="42" fill="#141618" stroke="#2A2D31" stroke-width="1"/>
+<text x="705.0" y="223" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="17" fill="#F2F2EF">3</text>
+<rect x="730" y="196" width="42" height="42" fill="#141618" stroke="#2A2D31" stroke-width="1"/>
+<text x="751.0" y="223" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="17" fill="#F2F2EF">5</text>
+<rect x="776" y="196" width="42" height="42" fill="#141618" stroke="#2A2D31" stroke-width="1"/>
+<text x="797.0" y="223" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="17" fill="#F2F2EF">2</text>
+<line x1="429.0" y1="238" x2="429.0" y2="246" stroke="#FF4D3D" stroke-width="1"/>
+<text x="429.0" y="258" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="7" letter-spacing="1.4" fill="#FF4D3D">CHECK DIGIT</text>
+<text x="40" y="282" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="7" letter-spacing="1.5" fill="#9CA1A7">MAKE</text>
+<text x="40" y="300" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#F2F2EF">HONDA</text>
+<line x1="164" y1="268" x2="164" y2="326" stroke="#2A2D31" stroke-width="1"/>
+<text x="178" y="282" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="7" letter-spacing="1.5" fill="#9CA1A7">MODEL</text>
+<text x="178" y="300" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#F2F2EF">ACCORD</text>
+<line x1="302" y1="268" x2="302" y2="326" stroke="#2A2D31" stroke-width="1"/>
+<text x="316" y="282" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="7" letter-spacing="1.5" fill="#9CA1A7">YEAR</text>
+<text x="316" y="300" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#F2F2EF">2003</text>
+<line x1="440" y1="268" x2="440" y2="326" stroke="#2A2D31" stroke-width="1"/>
+<text x="454" y="282" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="7" letter-spacing="1.5" fill="#9CA1A7">RECALLS</text>
+<text x="454" y="300" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#F2F2EF">24</text>
+<line x1="578" y1="268" x2="578" y2="326" stroke="#2A2D31" stroke-width="1"/>
+<text x="592" y="282" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="7" letter-spacing="1.5" fill="#9CA1A7">COMPLAINTS</text>
+<text x="592" y="300" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#F2F2EF">2013</text>
+<line x1="716" y1="268" x2="716" y2="326" stroke="#2A2D31" stroke-width="1"/>
+<text x="730" y="282" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="7" letter-spacing="1.5" fill="#9CA1A7">FUEL</text>
+<text x="730" y="300" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" fill="#F2F2EF">22 MPG</text>
+<line x1="40" y1="324" x2="840" y2="324" stroke="#2A2D31" stroke-width="1"/>
+<text x="40" y="346" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="7.5" letter-spacing="1.3" fill="#9CA1A7">SOURCES / vPIC · NHTSA · EPA</text>
+<text x="840" y="346" text-anchor="end" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="7.5" letter-spacing="1.3" fill="#9CA1A7">NO API KEY / PUBLIC DATA</text>
 </svg>
