@@ -1,0 +1,51 @@
+{
+  "name": "vehicle-research",
+  "version": "0.1.0",
+  "description": "Typed access to public US vehicle data: VIN validation, NHTSA recalls, complaints and crash ratings, and EPA fuel economy.",
+  "license": "UNLICENSED",
+  "private": true,
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "CHANGELOG.md"
+  ],
+  "sideEffects": false,
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "tsup",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit",
+    "check": "npm run typecheck && npm test && npm run build",
+    "test:live": "RUN_LIVE=1 vitest run tests/live.smoke.test.ts",
+    "example": "npm run build && node examples/basic.mjs"
+  },
+  "keywords": [
+    "vin",
+    "nhtsa",
+    "epa",
+    "vehicle",
+    "recalls",
+    "obd",
+    "typescript"
+  ],
+  "devDependencies": {
+    "@types/node": "^24.19.2",
+    "tsup": "^9.0.0",
+    "typescript": "^5.9.3",
+    "vitest": "^5.0.5"
+  }
+}
