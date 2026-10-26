@@ -6,6 +6,12 @@ updates:
       interval: weekly
     labels:
       - dependencies
+    # TypeScript 7 removes the compiler API that tsup's dts plugin uses.
+    # Re-enable majors when tsup ships support.
+    ignore:
+      - dependency-name: "typescript"
+        update-types:
+          - "version-update:semver-major"
   - package-ecosystem: github-actions
     directory: /
     schedule:
