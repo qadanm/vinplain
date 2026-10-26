@@ -1,6 +1,10 @@
 # Changelog
 
-## 0.2.0 — 2026-10-26
+## 0.2.1 (2026-10-26)
+
+New public-record artwork and a documentation pass. No API changes.
+
+## 0.2.0 (2026-10-26)
 
 Renamed to vinplain.
 
@@ -10,15 +14,15 @@ Renamed to vinplain.
 - Adds a release workflow for npm provenance.
 - Cache keys move to the `vinplain:` namespace.
 
-## 0.1.2 — 2026-10-26
+## 0.1.2 (2026-10-26)
 
 Build automatically before packing, so a clean checkout cannot publish an empty `dist`.
 
-## 0.1.1 — 2026-10-26
+## 0.1.1 (2026-10-26)
 
 Correct the license section. MIT is approved and included.
 
-## 0.1.0 — 2026-10-26
+## 0.1.0 (2026-10-26)
 
 Initial extraction from VINly's private research package.
 

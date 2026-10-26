@@ -1,84 +1,67 @@
 #!/usr/bin/env python3
 import os
 
-LIGHT = dict(bg1="#FAFAF7", bg2="#EEF2FF", ink="#08090A", muted="#525866",
-             accent="#0B5FFF", highlight="#D9FF3D", line="#D5DAE3",
-             card="#0B0C0E", card_ink="#F8FAFC", card_muted="#8B93A7",
-             pill="#FFFFFF", pill_line="#D5DAE3", glow="#0B5FFF")
-DARK = dict(bg1="#08090A", bg2="#0E1420", ink="#FAFAF7", muted="#9CA3AF",
-            accent="#6EA8FF", highlight="#D9FF3D", line="#1F2937",
-            card="#020305", card_ink="#F8FAFC", card_muted="#8B93A7",
-            pill="#111318", pill_line="#242A36", glow="#1D4ED8")
+LIGHT = dict(bg="#F4F4F1", ink="#111214", muted="#5F646A", line="#C9CDD2",
+             cell="#FFFFFF", red="#D7261E", red_ink="#FFFFFF")
+DARK = dict(bg="#0B0C0D", ink="#F2F2EF", muted="#9CA1A7", line="#2A2D31",
+            cell="#141618", red="#FF4D3D", red_ink="#0B0C0D")
 SANS = "Helvetica Neue, Helvetica, Arial, sans-serif"
 MONO = "ui-monospace, SFMono-Regular, Menlo, Consolas, monospace"
-
-
-def bars(x, y, p, width=800, gap=30, bar_w=18, base=8, tall=18):
-    """17 bars: one per VIN character, position nine highlighted."""
-    out = []
-    for i in range(17):
-        bx = x + i * (bar_w + gap)
-        h = tall if i == 8 else base
-        fill = p["highlight"] if i == 8 else p["ink"]
-        out.append(f'<rect x="{bx:.1f}" y="{y + (tall - h):.1f}" width="{bar_w}" height="{h}" rx="1" fill="{fill}" opacity="{1 if i==8 else 0.55}"/>')
-    return "\n".join(out)
+VIN = "1HGCM82633A004352"
 
 
 def banner(p, suffix):
-    w, h = 880, 360
-    return f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {w} {h}" width="{w}" height="{h}" role="img" aria-labelledby="t{suffix} d{suffix}">
-<title id="t{suffix}">vinplain</title>
-<desc id="d{suffix}">The public record, in plain code. A typed, keyless TypeScript client for VIN decode, NHTSA recalls, complaints, crash ratings, and EPA fuel economy.</desc>
-<defs>
-  <linearGradient id="bg{suffix}" x1="0" y1="0" x2="1" y2="1">
-    <stop offset="0" stop-color="{p['bg1']}"/><stop offset="1" stop-color="{p['bg2']}"/>
-  </linearGradient>
-  <radialGradient id="glow{suffix}" cx="50%" cy="50%" r="50%">
-    <stop offset="0" stop-color="{p['glow']}" stop-opacity="0.20"/><stop offset="1" stop-color="{p['glow']}" stop-opacity="0"/>
-  </radialGradient>
-</defs>
-<rect width="{w}" height="{h}" rx="20" fill="url(#bg{suffix})"/>
-<circle cx="120" cy="20" r="210" fill="url(#glow{suffix})"/>
-<rect x="1" y="1" width="{w-2}" height="{h-2}" rx="19" fill="none" stroke="{p['line']}" stroke-opacity="0.8"/>
-{bars(40, 44, p, width=800, gap=30, bar_w=18, base=10, tall=24)}
-<text x="40" y="114" font-family="{MONO}" font-size="8.5" letter-spacing="2.4" fill="{p['muted']}">PUBLIC VEHICLE RECORDS / US</text>
-<text x="840" y="114" text-anchor="end" font-family="{MONO}" font-size="8.5" letter-spacing="2.4" fill="{p['muted']}">V0.2 / MIT</text>
-<text x="36" y="182" font-family="{SANS}" font-size="76" font-weight="700" letter-spacing="-4" fill="{p['ink']}">vinplain<span fill="{p['accent']}">.</span></text>
-<text x="40" y="220" font-family="{SANS}" font-size="24" letter-spacing="-0.5" fill="{p['ink']}">The public record, in plain code.</text>
-<text x="41" y="246" font-family="{SANS}" font-size="12" fill="{p['muted']}">VIN decode, recalls, complaints, crash ratings, and fuel economy.</text>
-<text x="41" y="263" font-family="{SANS}" font-size="12" fill="{p['muted']}">No API key. No black box. No per-lookup fee.</text>
-<g font-family="{MONO}" font-size="8.5" letter-spacing="1.3">
-  <rect x="41" y="280" width="96" height="22" rx="11" fill="{p['pill']}" stroke="{p['pill_line']}"/><text x="89" y="294" text-anchor="middle" fill="{p['accent']}">NO API KEY</text>
-  <rect x="145" y="280" width="142" height="22" rx="11" fill="{p['pill']}" stroke="{p['pill_line']}"/><text x="216" y="294" text-anchor="middle" fill="{p['accent']}">ZERO RUNTIME DEPS</text>
-  <rect x="295" y="280" width="52" height="22" rx="11" fill="{p['pill']}" stroke="{p['pill_line']}"/><text x="321" y="294" text-anchor="middle" fill="{p['accent']}">MIT</text>
-</g>
-<rect x="516" y="40" width="324" height="286" rx="14" fill="{p['card']}"/>
-<circle cx="538" cy="62" r="4" fill="#F87171"/><circle cx="552" cy="62" r="4" fill="#FBBF24"/><circle cx="566" cy="62" r="4" fill="#34D399"/>
-<text x="538" y="92" font-family="{MONO}" font-size="8.5" letter-spacing="1.5" fill="{p['card_muted']}">TERMINAL</text>
-<text x="538" y="124" font-family="{MONO}" font-size="10.5" fill="{p['highlight']}">$ npx vinplain 1HGCM82633A004352</text>
-<line x1="538" y1="138" x2="818" y2="138" stroke="{p['card_muted']}" stroke-opacity="0.25"/>
-<text x="538" y="164" font-family="{MONO}" font-size="11" fill="{p['card_ink']}">2003 Honda Accord EX-V6</text>
-<text x="538" y="190" font-family="{MONO}" font-size="9.5" fill="{p['card_muted']}">VIN          1HGCM82633A004352</text>
-<text x="538" y="208" font-family="{MONO}" font-size="9.5" fill="{p['card_muted']}">Recalls      24 campaigns</text>
-<text x="538" y="226" font-family="{MONO}" font-size="9.5" fill="{p['card_muted']}">Complaints   2013</text>
-<text x="538" y="244" font-family="{MONO}" font-size="9.5" fill="{p['card_muted']}">Fuel         22 mpg combined</text>
-<text x="538" y="262" font-family="{MONO}" font-size="9.5" fill="{p['card_muted']}">Safety       unavailable</text>
-<circle cx="542" cy="292" r="4" fill="{p['highlight']}"/>
-<text x="554" y="295" font-family="{MONO}" font-size="8.5" fill="{p['highlight']}">STATUS OK</text>
-<text x="818" y="295" text-anchor="end" font-family="{MONO}" font-size="8" fill="{p['card_muted']}">NO KEY</text>
-<text x="40" y="338" font-family="{MONO}" font-size="8" letter-spacing="1.6" fill="{p['muted']}">17 CHARACTERS / 9TH IS THE CHECK DIGIT</text>
-</svg>'''
+    w, h = 880, 380
+    cell_w, cell_h, gap = 42, 42, 4
+    x0, y0 = 40, 196
+    out = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {w} {h}" width="{w}" height="{h}" role="img" aria-labelledby="t{suffix} d{suffix}">',
+           f'<title id="t{suffix}">vinplain</title>',
+           f'<desc id="d{suffix}">A public vehicle record: the 17-character VIN 1HGCM82633A004352 with the check digit at position nine marked in red, followed by the decoded 2003 Honda Accord record, 24 recall campaigns, 2013 complaints, and 22 mpg combined.</desc>',
+           f'<rect width="{w}" height="{h}" fill="{p["bg"]}"/>',
+           f'<rect x="20" y="20" width="{w-40}" height="{h-40}" fill="none" stroke="{p["line"]}" stroke-width="1"/>',
+           f'<text x="40" y="42" font-family="{MONO}" font-size="8" letter-spacing="2.2" fill="{p["muted"]}">VINPLAIN / PUBLIC RECORD</text>',
+           f'<text x="840" y="42" text-anchor="end" font-family="{MONO}" font-size="8" letter-spacing="2.2" fill="{p["muted"]}">V0.2 / MIT</text>',
+           f'<text x="36" y="126" font-family="{SANS}" font-size="72" font-weight="700" letter-spacing="-4.5" fill="{p["ink"]}">vinplain</text>',
+           f'<text x="40" y="158" font-family="{SANS}" font-size="20" letter-spacing="-0.3" fill="{p["ink"]}">Public vehicle records for TypeScript.</text>',
+           f'<text x="40" y="180" font-family="{SANS}" font-size="11.5" fill="{p["muted"]}">VIN decode, recalls, complaints, crash ratings, and fuel economy.</text>']
+    for i, ch in enumerate(VIN):
+        x = x0 + i * (cell_w + gap)
+        highlighted = i == 8
+        fill = p["red"] if highlighted else p["cell"]
+        stroke = p["red"] if highlighted else p["line"]
+        out.append(f'<rect x="{x}" y="{y0}" width="{cell_w}" height="{cell_h}" fill="{fill}" stroke="{stroke}" stroke-width="1"/>')
+        out.append(f'<text x="{x + cell_w/2:.1f}" y="{y0 + 27}" text-anchor="middle" font-family="{MONO}" font-size="17" fill="{p["red_ink"] if highlighted else p["ink"]}">{ch}</text>')
+    mid = x0 + 8 * (cell_w + gap) + cell_w / 2
+    out += [
+        f'<line x1="{mid}" y1="{y0+cell_h}" x2="{mid}" y2="{y0+cell_h+8}" stroke="{p["red"]}" stroke-width="1"/>',
+        f'<text x="{mid}" y="{y0+cell_h+20}" text-anchor="middle" font-family="{MONO}" font-size="7" letter-spacing="1.4" fill="{p["red"]}">CHECK DIGIT</text>',
+    ]
+    cols = [("MAKE", "HONDA"), ("MODEL", "ACCORD"), ("YEAR", "2003"),
+            ("RECALLS", "24"), ("COMPLAINTS", "2013"), ("FUEL", "22 MPG")]
+    for i, (label, value) in enumerate(cols):
+        x = 40 + i * 138
+        if i:
+            out.append(f'<line x1="{x-14}" y1="268" x2="{x-14}" y2="326" stroke="{p["line"]}" stroke-width="1"/>')
+        out.append(f'<text x="{x}" y="282" font-family="{MONO}" font-size="7" letter-spacing="1.5" fill="{p["muted"]}">{label}</text>')
+        out.append(f'<text x="{x}" y="300" font-family="{MONO}" font-size="11" fill="{p["ink"]}">{value}</text>')
+    out += [
+        f'<line x1="40" y1="324" x2="840" y2="324" stroke="{p["line"]}" stroke-width="1"/>',
+        f'<text x="40" y="346" font-family="{MONO}" font-size="7.5" letter-spacing="1.3" fill="{p["muted"]}">SOURCES / vPIC · NHTSA · EPA</text>',
+        f'<text x="840" y="346" text-anchor="end" font-family="{MONO}" font-size="7.5" letter-spacing="1.3" fill="{p["muted"]}">NO API KEY / PUBLIC DATA</text>',
+        '</svg>'
+    ]
+    return "\n".join(out)
 
 
 def mark(p):
-    w, h = 64, 64
+    w = h = 64
     out = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {w} {h}" width="{w}" height="{h}" role="img" aria-label="vinplain">',
-           '<rect width="64" height="64" rx="16" fill="#0B0C0E"/>']
+           f'<rect width="{w}" height="{h}" fill="{p["ink"]}"/>']
     for i in range(17):
         bx = 8 + i * 2.9
-        height = 28 if i == 8 else 16
-        fill = p["highlight"] if i == 8 else "#F8FAFC"
-        out.append(f'<rect x="{bx:.1f}" y="{48-height}" width="1.7" height="{height}" rx="0.6" fill="{fill}" opacity="{1 if i==8 else 0.9}"/>')
+        height = 30 if i == 8 else 18
+        fill = p["red"] if i == 8 else p["bg"]
+        out.append(f'<rect x="{bx:.1f}" y="{50-height}" width="1.8" height="{height}" fill="{fill}"/>')
     out.append('</svg>')
     return "\n".join(out)
 
@@ -87,4 +70,4 @@ out = os.path.join(os.path.dirname(__file__), "..", "assets")
 open(os.path.join(out, "banner-light.svg"), "w").write(banner(LIGHT, "L"))
 open(os.path.join(out, "banner-dark.svg"), "w").write(banner(DARK, "D"))
 open(os.path.join(out, "logo.svg"), "w").write(mark(LIGHT))
-print("wrote vinplain banner + logo")
+print("wrote public-record banner + logo")

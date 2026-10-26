@@ -1,12 +1,12 @@
 # expo-vin-ocr
 
-On-device VIN OCR for Expo, using Apple's Vision framework. It returns a validated VIN candidate, not a pile of raw text.
+On-device VIN OCR for Expo, using Apple's Vision framework. It returns a validated VIN candidate.
 
-**Pre-release.** Not published. iOS only.
+Pre-release. Not published. iOS only.
 
-## Why this exists
+## What it does
 
-Generic OCR gives you lines. A VIN needs more than that: the 17-character format, the ISO 3779 check digit, and repair for the characters OCR most often confuses (I/1, O/0). This package reads the photo on device, then hands the text to [`vinplain`](../) for validation.
+It reads text from a VIN photo with `VNRecognizeTextRequest`, on the device, then passes the lines to [`vinplain`](../) for extraction and check-digit validation.
 
 The photo never leaves the phone.
 
@@ -14,10 +14,10 @@ The photo never leaves the phone.
 
 - Expo SDK 52 or later
 - iOS 16 or later
-- A development build or prebuild. This uses a native module, so it does **not** run in Expo Go.
+- A development build or prebuild. This uses a native module, so it does not run in Expo Go.
 - `vinplain` as a peer dependency
 
-Android is not supported. There is no fallback.
+Android is not supported.
 
 ## Install
 
@@ -48,11 +48,11 @@ if (!result) {
   console.log(result.vin);
 } else {
   // A plausible read that needs confirmation.
-  console.log(result.vin, result.checkDigitApply ? 'confirm' : 'non-US VIN');
+  console.log(result.vin, result.checkDigitApplies ? 'confirm' : 'non-US VIN');
 }
 ```
 
-`recognizeText(uri)` is also exported if you want the raw lines.
+`recognizeText(uri)` returns the raw lines.
 
 ## API
 
@@ -65,22 +65,20 @@ if (!result) {
 
 - `vin`
 - `checkDigitValid`
-- `checkDigitApplies` (false outside North America)
+- `checkDigitApplies`
 - `repaired`
 
 ## Privacy
 
-- Vision runs on device.
-- No network request, no analytics, no upload.
-- The image URI is read locally and discarded after recognition.
+Vision runs on device. There is no network request, no analytics, and no upload. The image URI is read locally and discarded after recognition.
 
-## Limitations
+## Limits
 
 - iOS only.
-- The module accepts a `file://` URI or a bare path. It does not open the camera itself; pair it with `expo-image-picker` or `expo-camera`.
+- The module accepts a `file://` URI or a bare path. It does not open the camera; pair it with `expo-image-picker` or `expo-camera`.
 - OCR quality depends on the photo. Glare, angle, and low light still matter.
 - A failed check digit outside North America is not necessarily a bad read. `checkDigitApplies` tells you whether the digit is authoritative.
-- This is not a substitute for confirming the VIN against the door jamb or registration.
+- It does not replace confirming the VIN against the door jamb or registration.
 
 ## Testing
 
