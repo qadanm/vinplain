@@ -2,8 +2,8 @@
   "name": "vehicle-research",
   "version": "0.1.0",
   "description": "Typed access to public US vehicle data: VIN validation, NHTSA recalls, complaints and crash ratings, and EPA fuel economy.",
-  "license": "UNLICENSED",
-  "private": true,
+  "license": "MIT",
+  "private": false,
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
@@ -18,7 +18,8 @@
   "files": [
     "dist",
     "README.md",
-    "CHANGELOG.md"
+    "CHANGELOG.md",
+    "LICENSE"
   ],
   "sideEffects": false,
   "engines": {
@@ -47,5 +48,13 @@
     "tsup": "^9.0.0",
     "typescript": "^5.9.3",
     "vitest": "^5.0.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/qadanm/vehicle-research.git"
+  },
+  "homepage": "https://github.com/qadanm/vehicle-research#readme",
+  "bugs": {
+    "url": "https://github.com/qadanm/vehicle-research/issues"
   }
 }

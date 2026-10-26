@@ -1,0 +1,43 @@
+{
+  "name": "expo-vin-ocr",
+  "version": "0.1.0",
+  "description": "On-device VIN OCR for Expo using Apple Vision. Returns a validated VIN candidate, not raw text.",
+  "license": "MIT",
+  "private": true,
+  "main": "index.ts",
+  "types": "index.ts",
+  "files": [
+    "index.ts",
+    "ios",
+    "expo-module.config.json",
+    "README.md"
+  ],
+  "keywords": [
+    "expo",
+    "ocr",
+    "vin",
+    "vision",
+    "ios",
+    "on-device"
+  ],
+  "peerDependencies": {
+    "expo": ">=52",
+    "expo-modules-core": "*",
+    "vehicle-research": "^0.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.19.2",
+    "typescript": "^5.9.3",
+    "vitest": "^5.0.5"
+  },
+  "scripts": {
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "check": "npm run typecheck && npm test"
+  },
+  "peerDependenciesMeta": {
+    "vehicle-research": {
+      "optional": true
+    }
+  }
+}

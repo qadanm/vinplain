@@ -151,6 +151,10 @@ configureHttp({
 - Government APIs can be slow and rate-limited. Cache results; do not hammer them.
 - This is not a substitute for a professional inspection or a manufacturer's service information.
 
+## Optional companion: expo-vin-ocr
+
+The repository also contains [`expo-vin-ocr`](expo-vin-ocr/), an iOS-only Expo module that reads a VIN from a photo with Apple Vision and returns a validated candidate. It is not part of the core package, has its own README, and does not run in Expo Go. Android is not supported.
+
 ## Testing
 
 Deterministic tests use the response shapes confirmed against the live APIs. They do not call the network.
