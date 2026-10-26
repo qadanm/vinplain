@@ -1,6 +1,6 @@
 {
   "name": "vehicle-research",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Typed access to public US vehicle data: VIN validation, NHTSA recalls, complaints and crash ratings, and EPA fuel economy.",
   "license": "MIT",
   "private": false,
@@ -32,7 +32,8 @@
     "typecheck": "tsc --noEmit",
     "check": "npm run typecheck && npm test && npm run build",
     "test:live": "RUN_LIVE=1 vitest run tests/live.smoke.test.ts",
-    "example": "npm run build && node examples/basic.mjs"
+    "example": "npm run build && node examples/basic.mjs",
+    "prepack": "npm run build"
   },
   "keywords": [
     "vin",

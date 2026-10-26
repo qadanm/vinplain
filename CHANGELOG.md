@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.2 — 2026-10-26
+
+Build automatically before packing, so a clean checkout cannot publish an empty `dist`.
+
 ## 0.1.1 — 2026-10-26
 
 Correct the license section. MIT is approved and included.
