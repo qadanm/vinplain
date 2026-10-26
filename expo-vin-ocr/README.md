@@ -2,7 +2,7 @@
 
 On-device VIN OCR for Expo, using Apple's Vision framework. It returns a validated VIN candidate.
 
-Pre-release. Not published. iOS only.
+Pre-release, not published, iOS only.
 
 ## What it does
 
@@ -70,7 +70,7 @@ if (!result) {
 
 ## Privacy
 
-Vision runs on device. There is no network request, no analytics, and no upload. The image URI is read locally and discarded after recognition.
+Vision runs on device. It makes no network request and collects no analytics. The image URI is read locally and discarded after recognition.
 
 ## Limits
 

@@ -9,7 +9,7 @@
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-111214" alt="MIT license"></a>
 </p>
 
-`vinplain` reads the public record for a VIN: the factory decode, recall campaigns, owner complaints, crash-test ratings, and fuel economy. It calls NHTSA's vPIC and safety APIs and the Department of Energy's fuel-economy API directly. No API key, no per-lookup fee.
+`vinplain` reads the public record for a VIN: the factory decode, recall campaigns, owner complaints, crash-test ratings, and fuel economy. It calls NHTSA's vPIC and safety APIs and the Department of Energy's fuel-economy API directly. It needs no API key and charges no per-lookup fee.
 
 The package has no runtime dependencies. It runs on Node 18 or later, in browsers, and in edge runtimes that provide `fetch`.
 
@@ -192,7 +192,7 @@ MIT. See [LICENSE](LICENSE).
 | --- | --- |
 | Version | 0.2.1 |
 | npm | Pending registry credentials |
-| GitHub release | v0.2.0 |
+| GitHub release | v0.2.1 |
 | Runtime dependencies | 0 |
 | Node | 18 or later |
 | Tests | 34 deterministic, 4 live, 3 OCR |
