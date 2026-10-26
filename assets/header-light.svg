@@ -4,7 +4,7 @@
 <rect width="880" height="170" fill="#F2EFE8"/>
 <rect x="16" y="16" width="848" height="138" fill="none" stroke="#141414" stroke-width="1"/>
 <path d="M16 30V16h14 M850 16h14v14 M864 140v14h-14 M30 154H16v-14" fill="none" stroke="#141414" stroke-width="1.3"/>
-<text x="34" y="42" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="8" letter-spacing="2" fill="#6A665F">VEHICLE-RESEARCH / PRE-RELEASE 0.1.0</text>
+<text x="34" y="42" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="8" letter-spacing="2" fill="#6A665F">VEHICLE-RESEARCH / PRE-RELEASE / V0.1</text>
 <text x="846" y="42" text-anchor="end" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="8" letter-spacing="2" fill="#6A665F">PUBLIC DATA / NO API KEYS</text>
 <text x="32" y="92" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="40" font-weight="700" letter-spacing="-1.4" fill="#141414">Public vehicle data, typed.</text>
 <text x="34" y="118" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="10" letter-spacing="1.5" fill="#6A665F">VIN VALIDATION / NHTSA / EPA</text>

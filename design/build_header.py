@@ -15,7 +15,7 @@ def header(p):
            f'<rect width="{w}" height="{h}" fill="{p["bg"]}"/>',
            f'<rect x="16" y="16" width="{w-32}" height="{h-32}" fill="none" stroke="{p["line"]}" stroke-width="1"/>',
            f'<path d="M16 30V16h14 M850 16h14v14 M864 140v14h-14 M30 154H16v-14" fill="none" stroke="{p["line"]}" stroke-width="1.3"/>',
-           f'<text x="34" y="42" font-family="{MONO}" font-size="8" letter-spacing="2" fill="{p["muted"]}">VEHICLE-RESEARCH / PRE-RELEASE 0.1.0</text>',
+           f'<text x="34" y="42" font-family="{MONO}" font-size="8" letter-spacing="2" fill="{p["muted"]}">VEHICLE-RESEARCH / PRE-RELEASE / V0.1</text>',
            f'<text x="846" y="42" text-anchor="end" font-family="{MONO}" font-size="8" letter-spacing="2" fill="{p["muted"]}">PUBLIC DATA / NO API KEYS</text>',
            f'<text x="32" y="92" font-family="{SANS}" font-size="40" font-weight="700" letter-spacing="-1.4" fill="{p["ink"]}">Public vehicle data, typed.</text>',
            f'<text x="34" y="118" font-family="{MONO}" font-size="10" letter-spacing="1.5" fill="{p["muted"]}">VIN VALIDATION / NHTSA / EPA</text>',
