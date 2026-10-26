@@ -187,7 +187,9 @@ See [SECURITY.md](SECURITY.md). Do not open a public issue for a vulnerability.
 
 ## License
 
-No license is granted yet. MIT is the proposed license and is awaiting the owner's approval. Until a `LICENSE` file is added, no reuse rights are granted.
+MIT. See [LICENSE](LICENSE).
+
+The package calls US federal data sources; it does not relicense their data.
 
 ## Status
 

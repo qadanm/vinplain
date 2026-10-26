@@ -1,6 +1,6 @@
 {
   "name": "vehicle-research",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Typed access to public US vehicle data: VIN validation, NHTSA recalls, complaints and crash ratings, and EPA fuel economy.",
   "license": "MIT",
   "private": false,

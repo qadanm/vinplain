@@ -1,6 +1,10 @@
 # Changelog
 
-## 0.1.0 — unreleased
+## 0.1.1 — 2026-10-26
+
+Correct the license section. MIT is approved and included.
+
+## 0.1.0 — 2026-10-26
 
 Initial extraction from VINly's private research package.
 
