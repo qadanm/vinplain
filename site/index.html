@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>vinplain — public vehicle records for TypeScript</title>
+  <meta name="description" content="VIN decode, NHTSA recalls, complaints, crash ratings, and EPA fuel economy from US public sources. TypeScript, no API key, MIT.">
+  <meta property="og:title" content="vinplain — public vehicle records for TypeScript">
+  <meta property="og:description" content="VIN decode, NHTSA recalls, complaints, crash ratings, and EPA fuel economy. No API key.">
+  <meta property="og:image" content="https://qadanm.github.io/vinplain/assets/og.jpg">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="./">
+        <img src="assets/logo.svg" alt="" width="32" height="32">
+        <span>vinplain</span>
+      </a>
+      <nav aria-label="Project links">
+        <a href="https://www.npmjs.com/package/vinplain">npm</a>
+        <a href="https://github.com/qadanm/vinplain">GitHub</a>
+        <a href="https://qadan.co/work/vinplain/">Case study</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero wrap">
+      <div class="hero-copy">
+        <p class="kicker">Public vehicle records / TypeScript</p>
+        <h1>Public vehicle records for TypeScript.</h1>
+        <p class="lede">VIN decode, recall campaigns, owner complaints, crash ratings, and fuel economy from US public sources. No API key. No vendor account.</p>
+        <div class="install"><code>npm install vinplain</code></div>
+        <p class="meta">MIT · v0.2.2 · 0 runtime dependencies</p>
+      </div>
+
+      <div class="record" aria-label="Example vehicle record for VIN 1HGCM82633A004352">
+        <div class="record-head"><span>Vehicle record</span><span>Public</span></div>
+        <div class="vin" aria-label="VIN 1HGCM82633A004352, position 9 is the check digit">
+          <span>1</span><span>H</span><span>G</span><span>C</span><span>M</span><span>8</span><span>2</span><span>6</span><span class="check">3</span><span>3</span><span>A</span><span>0</span><span>0</span><span>4</span><span>3</span><span>5</span><span>2</span>
+        </div>
+        <p class="check-note">Check digit</p>
+        <dl class="fields">
+          <div><dt>Make</dt><dd>Honda</dd></div>
+          <div><dt>Model</dt><dd>Accord</dd></div>
+          <div><dt>Year</dt><dd>2003</dd></div>
+          <div><dt>Recalls</dt><dd>24</dd></div>
+          <div><dt>Complaints</dt><dd>2013</dd></div>
+          <div><dt>Fuel</dt><dd>22 mpg</dd></div>
+        </dl>
+        <div class="record-foot"><span>Sources / vPIC · NHTSA · EPA</span><span>No key</span></div>
+      </div>
+    </section>
+
+    <section class="section wrap" aria-labelledby="one-call">
+      <div class="section-head"><span>01</span><h2 id="one-call">One call</h2></div>
+      <p class="section-copy">The summary decodes the VIN, then runs the record lookups in parallel. Each section resolves on its own, so a slow complaint database does not hold up the recall list.</p>
+      <pre><code>import { getVehicleSummary } from 'vinplain';
+
+const record = await getVehicleSummary({ vin: '1HGCM82633A004352' });
+
+record.specs;           // 2003 Honda Accord EX-V6
+record.recalls.length;  // 24
+record.status.recalls;  // 'ok'</code></pre>
+    </section>
+
+    <section class="section wrap" aria-labelledby="returns">
+      <div class="section-head"><span>02</span><h2 id="returns">What it returns</h2></div>
+      <table class="ledger">
+        <thead><tr><th>Section</th><th>Contents</th></tr></thead>
+        <tbody>
+          <tr><td>Decode</td><td>Engine, displacement, horsepower, transmission, drivetrain, body, plant, airbags, seating, driver assistance.</td></tr>
+          <tr><td>Recalls</td><td>Campaign number, component, summary, consequence, remedy, date. Up to 50 campaigns.</td></tr>
+          <tr><td>Complaints</td><td>Totals by component, plus crash, fire, injury, and death counts.</td></tr>
+          <tr><td>Safety</td><td>Overall, frontal, side, side-pole, rollover, rollover probability, ADAS availability.</td></tr>
+          <tr><td>Fuel</td><td>City, highway, combined MPG, annual cost, CO2, volumes, EV range, EPA variant.</td></tr>
+          <tr><td>Investigations</td><td>Whether the model appears in NHTSA's investigations list for the year.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="section wrap" aria-labelledby="failure">
+      <div class="section-head"><span>03</span><h2 id="failure">When a source fails</h2></div>
+      <p class="section-copy"><code>null</code> means the request failed. <code>[]</code> means the source answered and there is nothing on file. The summary reports the same distinction in a status for each section, so a failed recall check cannot render as a clean record.</p>
+      <pre><code>if (record.status.recalls === 'unavailable') {
+  renderUnavailable('Recalls');
+} else if (record.status.recalls === 'empty') {
+  renderEmpty('No recalls on file');
+} else {
+  renderRecalls(record.recalls);
+}</code></pre>
+    </section>
+
+    <section class="section wrap" aria-labelledby="sources">
+      <div class="section-head"><span>04</span><h2 id="sources">Sources</h2></div>
+      <table class="ledger">
+        <thead><tr><th>Source</th><th>Used for</th><th>Auth</th></tr></thead>
+        <tbody>
+          <tr><td><a href="https://vpic.nhtsa.dot.gov/api/">NHTSA vPIC</a></td><td>VIN decode, makes, models, years</td><td>None</td></tr>
+          <tr><td><a href="https://api.nhtsa.gov/">NHTSA</a></td><td>Recalls, complaints, investigations, NCAP</td><td>None</td></tr>
+          <tr><td><a href="https://www.fueleconomy.gov/feg/ws/">fueleconomy.gov</a></td><td>MPG, fuel cost, CO2, EV range</td><td>None</td></tr>
+        </tbody>
+      </table>
+      <p class="section-copy small">US federal services. Check each source's terms before commercial use. The package does not relicense their data.</p>
+    </section>
+
+    <section class="section wrap" aria-labelledby="not">
+      <div class="section-head"><span>05</span><h2 id="not">What it does not do</h2></div>
+      <p class="section-copy">It does not include title brands, accidents, odometer readings, auctions, valuations, or listings. It does not decode a VIN offline. It does not host an API. It reads the public record and stops.</p>
+      <p class="section-copy">The companion <a href="https://github.com/qadanm/vinplain/tree/main/expo-vin-ocr">expo-vin-ocr</a> reads a VIN from a photo with Apple Vision, on device, and hands the text to the same validation layer.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <p><strong>vinplain</strong> · MIT · <a href="https://www.npmjs.com/package/vinplain">npm</a> · <a href="https://github.com/qadanm/vinplain">GitHub</a> · <a href="https://qadan.co/work/vinplain/">Case study</a> · <a href="https://qadan.co/">qadan.co</a></p>
+      <p class="meta">Public vehicle records for TypeScript.</p>
+    </div>
+  </footer>
+</body>
+</html>

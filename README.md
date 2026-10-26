@@ -162,6 +162,7 @@ configureHttp({
 
 ## Docs
 
+- [Website](https://qadanm.github.io/vinplain/)
 - [Getting started](docs/getting-started.md)
 - [API reference](docs/api.md)
 - [Failure model](docs/failure-model.md)
