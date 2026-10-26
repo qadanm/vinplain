@@ -1,6 +1,6 @@
 {
   "name": "vinplain",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Typed, keyless access to US vehicle data: VIN decode, NHTSA recalls, complaints, crash ratings, and EPA fuel economy.",
   "license": "MIT",
   "private": false,
@@ -67,7 +67,6 @@
     "vinplain": "bin/vinplain.mjs"
   },
   "publishConfig": {
-    "access": "public",
-    "provenance": true
+    "access": "public"
   }
 }

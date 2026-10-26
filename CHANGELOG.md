@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.2 (2026-10-26)
+
+Move provenance from `publishConfig` to the release workflow. Provenance requires a CI provider with OIDC, so a local publish cannot generate it.
+
 ## 0.2.1 (2026-10-26)
 
 New public-record artwork and a documentation pass. No API changes.

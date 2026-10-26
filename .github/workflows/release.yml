@@ -33,8 +33,17 @@ jobs:
           else
             echo "configured=false" >> "$GITHUB_OUTPUT"
           fi
+      - name: Check whether this version is already published
+        id: version
+        run: |
+          version=$(node -p "require('./package.json').version")
+          if npm view "vinplain@$version" version >/dev/null 2>&1; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+          fi
       - name: Publish with provenance
-        if: steps.npm.outputs.configured == 'true'
+        if: steps.npm.outputs.configured == 'true' && steps.version.outputs.exists != 'true'
         run: npm publish --provenance --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

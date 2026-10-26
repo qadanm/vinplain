@@ -4,6 +4,7 @@
 </picture>
 
 <p align="center">
+  <a href="https://www.npmjs.com/package/vinplain"><img src="https://img.shields.io/npm/v/vinplain?color=D7261E" alt="npm"></a>
   <a href="https://github.com/qadanm/vinplain/actions/workflows/ci.yml"><img src="https://github.com/qadanm/vinplain/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
   <a href="https://github.com/qadanm/vinplain/releases"><img src="https://img.shields.io/github/v/release/qadanm/vinplain?label=release&color=D7261E" alt="Release"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-111214" alt="MIT license"></a>
@@ -17,19 +18,19 @@ Use it when you need the public record inside an app, a marketplace, or a test s
 
 ## Install
 
-Not on npm yet. Use the GitHub release or build from source:
+```bash
+npm install vinplain
+```
+
+Requires Node 18 or later, a browser, or an edge runtime with `fetch`. React Native and Expo need a `fetch` polyfill on older SDKs and a durable cache backend.
+
+To work on the package:
 
 ```bash
 git clone https://github.com/qadanm/vinplain.git
 cd vinplain
 npm install
 npm run build
-```
-
-Once published:
-
-```bash
-npm install vinplain
 ```
 
 ## Quickstart
@@ -190,9 +191,9 @@ MIT. See [LICENSE](LICENSE).
 
 | | |
 | --- | --- |
-| Version | 0.2.1 |
-| npm | Pending registry credentials |
-| GitHub release | v0.2.1 |
+| Version | 0.2.2 |
+| npm | 0.2.2 |
+| GitHub release | v0.2.2 |
 | Runtime dependencies | 0 |
 | Node | 18 or later |
 | Tests | 34 deterministic, 4 live, 3 OCR |
