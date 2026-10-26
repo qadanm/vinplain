@@ -1,5 +1,5 @@
 /**
- * Public types for the vehicle-research data layer.
+ * Public types for the vinplain data layer.
  * Sources: NHTSA vPIC, NHTSA recalls/complaints/NCAP, and the US DOE
  * fuel-economy API.
  */

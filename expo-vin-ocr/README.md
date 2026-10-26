@@ -6,7 +6,7 @@ On-device VIN OCR for Expo, using Apple's Vision framework. It returns a validat
 
 ## Why this exists
 
-Generic OCR gives you lines. A VIN needs more than that: the 17-character format, the ISO 3779 check digit, and repair for the characters OCR most often confuses (I/1, O/0). This package reads the photo on device, then hands the text to [`vehicle-research`](../) for validation.
+Generic OCR gives you lines. A VIN needs more than that: the 17-character format, the ISO 3779 check digit, and repair for the characters OCR most often confuses (I/1, O/0). This package reads the photo on device, then hands the text to [`vinplain`](../) for validation.
 
 The photo never leaves the phone.
 
@@ -15,7 +15,7 @@ The photo never leaves the phone.
 - Expo SDK 52 or later
 - iOS 16 or later
 - A development build or prebuild. This uses a native module, so it does **not** run in Expo Go.
-- `vehicle-research` as a peer dependency
+- `vinplain` as a peer dependency
 
 Android is not supported. There is no fallback.
 
@@ -31,7 +31,7 @@ npm install
 Once published:
 
 ```bash
-npx expo install expo-vin-ocr vehicle-research
+npx expo install expo-vin-ocr vinplain
 npx expo prebuild
 ```
 
@@ -61,7 +61,7 @@ if (!result) {
 | `recognizeText(uri)` | `Promise<string[]>` |
 | `recognizeVin(uri)` | `Promise<VinCandidate \| null>` |
 
-`VinCandidate` comes from `vehicle-research`:
+`VinCandidate` comes from `vinplain`:
 
 - `vin`
 - `checkDigitValid`

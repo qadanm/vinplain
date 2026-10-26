@@ -11,7 +11,7 @@
     "skipLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "vehicle-research": ["../src/index.ts"],
+      "vinplain": ["../src/index.ts"],
       "expo-modules-core": ["./tests/mocks/expo-modules-core.ts"]
     }
   },

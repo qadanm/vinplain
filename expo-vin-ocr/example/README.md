@@ -8,7 +8,7 @@ A minimal Expo screen that picks a photo and reads a VIN.
 npx create-expo-app vin-ocr-example
 cd vin-ocr-example
 npx expo install expo-image-picker
-npm install ../..        # vehicle-research
+npm install ../..        # vinplain
 npm install ../../expo-vin-ocr
 npx expo prebuild
 npx expo run:ios

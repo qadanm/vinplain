@@ -1,5 +1,5 @@
 import { requireNativeModule } from 'expo-modules-core';
-import { pickBestVin, type VinCandidate } from 'vehicle-research';
+import { pickBestVin, type VinCandidate } from 'vinplain';
 
 interface VinOcrNativeModule {
   recognizeText(uri: string): Promise<string[]>;
@@ -19,7 +19,7 @@ export async function recognizeText(uri: string): Promise<string[]> {
 
 /**
  * Read a VIN from a photo. Vision returns raw lines; selection, OCR confusion
- * repair, and the ISO 3779 check digit are handled by `vehicle-research`.
+ * repair, and the ISO 3779 check digit are handled by `vinplain`.
  *
  * Returns null when no plausible VIN was found.
  */

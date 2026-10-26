@@ -1,91 +1,116 @@
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/header-dark.svg">
-  <img src="assets/header-light.svg" alt="vehicle-research: public vehicle data, typed. A TypeScript client for vPIC, NHTSA, and EPA." width="880">
+  <source media="(prefers-color-scheme: dark)" srcset="assets/banner-dark.svg">
+  <img src="assets/banner-light.svg" alt="vinplain: the public record, in plain code. A typed, keyless client for VIN decode, NHTSA recalls, complaints, crash ratings, and EPA fuel economy." width="880">
 </picture>
 
-**Pre-release.** Not published to npm. The API may change before 1.0.
+<p align="center">
+  <a href="https://github.com/qadanm/vinplain/actions/workflows/ci.yml"><img src="https://github.com/qadanm/vinplain/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
+  <a href="https://github.com/qadanm/vinplain/releases"><img src="https://img.shields.io/github/v/release/qadanm/vinplain?label=release&color=0B5FFF" alt="Release"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-0B5FFF" alt="MIT license"></a>
+  <img src="https://img.shields.io/badge/TypeScript-5.9-3178C6?logo=typescript&logoColor=white" alt="TypeScript">
+  <img src="https://img.shields.io/badge/runtime%20deps-0-0B5FFF" alt="Zero runtime dependencies">
+</p>
 
-`vehicle-research` is a TypeScript client for the US public vehicle datasets. Give it a VIN and it decodes the vehicle, then fetches recalls, owner complaints, crash-test ratings, and fuel economy from the agencies that publish them. No API keys, no scraping, no commercial data.
+**The public record, in plain code.**
 
-It was extracted from VINly, an iOS app that uses the same sources. The product code stays private; this is the reusable layer.
+`vinplain` is a typed, keyless TypeScript client for US vehicle data. Give it a VIN and it returns the decode, recall campaigns, owner complaints, crash-test ratings, and fuel economy from the agencies that publish them.
+
+No API key. No per-lookup fee. No black box. Zero runtime dependencies.
+
+> Not a vehicle history report. Not an offline decoder. The public-record layer for vehicle apps.
 
 ## Why this exists
 
-Several commercial vehicle APIs wrap the same three public datasets. This package calls the sources directly, keeps the response mapping in typed code, and returns `null` when a source is down instead of inventing a clean record. That distinction matters: "no recalls found" and "could not check" are different answers, and a safety product must not confuse them.
+Most vehicle packages stop at year, make, and model. The paid APIs go further, but they hide the sources, charge per lookup, and turn a public record into a product you rent.
+
+`vinplain` reads the public record directly:
+
+- **vPIC** decodes the VIN and lists makes and models.
+- **NHTSA** publishes recalls, complaints, investigations, and NCAP crash ratings.
+- **EPA** publishes fuel economy, annual fuel cost, CO2, and EV range.
+
+One typed client, one cache, one failure model. The data is public; the client should be too.
+
+## Install
+
+The package is not on npm yet. Use the GitHub release or build from source:
+
+```bash
+git clone https://github.com/qadanm/vinplain.git
+cd vinplain
+npm install
+npm run build
+```
+
+Once published:
+
+```bash
+npm install vinplain
+```
+
+Requires Node 18 or later, or any runtime with `fetch`, `AbortController`, and `setTimeout`.
+
+## Quickstart
+
+```ts
+import { getVehicleSummary } from 'vinplain';
+
+const summary = await getVehicleSummary({ vin: '1HGCM82633A004352' });
+
+console.log(summary.specs);            // 2003 Honda Accord EX-V6
+console.log(summary.recalls?.length);  // 24
+console.log(summary.status.recalls);   // 'ok' | 'empty' | 'unavailable' | 'skipped'
+```
+
+`getVehicleSummary` decodes the VIN first, then runs every record lookup in parallel. Each section resolves independently, so a slow or failed source does not sink the rest.
+
+## CLI
+
+```bash
+npx vinplain 1HGCM82633A004352
+```
+
+```text
+2003 Honda Accord EX-V6
+  VIN            1HGCM82633A004352
+  Recalls        24 campaign(s)
+  Complaints     2013 (158 crash, 19 fire, 157 injury, 1 death)
+  Safety         overall n/a, frontal n/a, side n/a
+  Fuel           22 mpg combined, $2900/year
+  Investigations listed
+```
+
+Use `--json` for the full typed summary.
+
+## What you get
+
+| Capability | Detail |
+| --- | --- |
+| **VIN validation** | 17-character format, ISO 3779 check digit, WMI region, OCR extraction and single-character repair |
+| **VIN decode** | Engine, displacement, horsepower, transmission, drivetrain, body, plant, airbags, seating, driver assistance |
+| **Recalls** | Campaign number, component, summary, consequence, remedy, date |
+| **Complaints** | Aggregated by component, with crash, fire, injury, and death tallies |
+| **Investigations** | Whether the model appears in NHTSA's investigations list |
+| **Safety ratings** | Overall, frontal, side, side-pole, rollover, rollover probability, ADAS availability |
+| **Fuel economy** | City, highway, combined MPG, annual fuel cost, CO2, volumes, EV range, EPA variant |
+| **Vehicle lists** | Consumer makes, models by year, model-year range |
+| **Injection** | Cache backend and timeouts, no framework or storage assumptions |
 
 ## Sources
 
 | Source | Used for | Auth |
 | --- | --- | --- |
-| [NHTSA vPIC](https://vpic.nhtsa.dot.gov/api/) | VIN decode, makes, models, model years | None |
-| [NHTSA](https://api.nhtsa.gov/) | Recall campaigns, owner complaints, investigations, NCAP ratings | None |
-| [fueleconomy.gov](https://www.fueleconomy.gov/feg/ws/) | MPG, annual fuel cost, CO2, EV range, EPA specs | None |
+| [NHTSA vPIC](https://vpic.nhtsa.dot.gov/api/) | VIN decode, makes, models, years | None |
+| [NHTSA](https://api.nhtsa.gov/) | Recalls, complaints, investigations, NCAP | None |
+| [fueleconomy.gov](https://www.fueleconomy.gov/feg/ws/) | MPG, fuel cost, CO2, EV range | None |
 
-All three are US federal services. Check each source's terms before commercial use; this package does not grant rights to the data.
-
-## Install
-
-The package is not on npm yet. Build from source:
-
-```bash
-git clone https://github.com/qadanm/vehicle-research.git
-cd vehicle-research
-npm install
-npm run build
-```
-
-Once published, the install will be:
-
-```bash
-npm install vehicle-research
-```
-
-Requires Node 18 or later, or any runtime with `fetch`, `AbortController`, and `setTimeout`. There are no runtime dependencies.
-
-## Quickstart
-
-```ts
-import { decodeVin, getRecallsDetailed } from 'vehicle-research';
-
-const specs = await decodeVin('1HGCM82633A004352');
-if (!specs?.year || !specs.make || !specs.model) {
-  throw new Error('Could not decode that VIN');
-}
-
-const recalls = await getRecallsDetailed({
-  year: specs.year,
-  make: specs.make,
-  model: specs.model,
-});
-
-console.log(`${specs.year} ${specs.make} ${specs.model}`);
-console.log(recalls === null ? 'Recalls unavailable' : `${recalls.length} campaigns`);
-```
-
-The same flow is in [`examples/basic.mjs`](examples/basic.mjs) and is run against the built package:
-
-```bash
-npm run example
-# 2003 Honda Accord EX-V6
-# Recalls: 24 campaigns
-```
-
-## What you get
-
-- **VIN validation.** 17-character format, the ISO 3779 check digit, WMI region classification, and OCR extraction that repairs common I/l and O/0 misreads. The check digit is only treated as authoritative for North American VINs, where manufacturers actually implement it.
-- **VIN decode.** Extended vPIC decode: engine, displacement, horsepower, transmission, drivetrain, body, plant, airbags, seating, and factory driver-assistance fields.
-- **Recalls.** Campaign number, component, summary, consequence, remedy, and date. The lookup tries multiple NHTSA model spellings rather than trusting one, because a rejected spelling and a genuine zero look identical.
-- **Complaints.** Aggregated by component, with crash, fire, injury, and death tallies.
-- **Investigations.** Whether the model appears in NHTSA's investigations list.
-- **Safety ratings.** Overall, frontal, side, side-pole, and rollover stars, plus rollover probability and ADAS availability where NCAP publishes them.
-- **Fuel economy.** City, highway, and combined MPG, annual fuel cost, CO2, passenger and luggage volume, EV range, and the EPA variant the numbers describe.
-- **Vehicle lists.** Consumer makes, models by year, and model-year range.
-- **Injected cache and timeouts.** No storage or framework assumptions.
+All three are US federal services. Check each source's terms before commercial use. The package does not relicense their data.
 
 ## API
 
 | Function | Returns |
 | --- | --- |
+| `getVehicleSummary({ vin })` | `VehicleSummary` with per-section status |
 | `decodeVin(vin)` | `VehicleSpecs \| null` |
 | `getRecallsDetailed({ year, make, model })` | `RecallCampaign[] \| null` |
 | `getComplaints({ year, make, model })` | `ComplaintSummary \| null` |
@@ -93,29 +118,28 @@ npm run example
 | `getSafetyRatings(query)` | `SafetyRating \| null` |
 | `getFuelEconomy(query)` | `FuelEconomy \| null` |
 | `getEpaSpecs(query)` | `VehicleSpecs \| null` |
-| `getMakes()` | `string[]` |
-| `getModels(make, year)` | `string[]` |
+| `getMakes()` / `getModels(make, year)` | `string[]` |
 | `getYears()` | `number[]` |
-| `resolveNhtsaModel(issueType, query)` | `string` |
 | `mergeSpecs(primary, fallback)` | `VehicleSpecs \| undefined` |
 
 VIN helpers: `isVinFormat`, `isCheckDigitValid`, `computeCheckDigit`, `normalizeVin`, `wmiRegion`, `extractVins`, `pickBestVin`.
 
 ### `null` is not `[]`
 
-This is the most important contract in the package:
+This is the contract the package is built around:
 
 - `[]` means the source answered and there is nothing on file.
 - `null` means the source could not be reached or returned an unusable response.
+- `getVehicleSummary` makes the same distinction in `status`, per section.
 
 Do not render `null` as "no recalls". A failed check is not a clean record.
 
 ## Configuration
 
-The default cache is a per-process `Map`; pass a durable backend once at startup.
+The default cache is a per-process `Map`. Inject a durable backend once at startup:
 
 ```ts
-import { configureCache, type CacheBackend } from 'vehicle-research';
+import { configureCache, type CacheBackend } from 'vinplain';
 
 const cache: CacheBackend = {
   async get(key) {
@@ -130,10 +154,10 @@ const cache: CacheBackend = {
 configureCache(cache);
 ```
 
-Timeouts are configurable. The complaints endpoint is slower because some nameplates return multi-megabyte payloads.
+Timeouts are configurable. Complaints can be multi-megabyte payloads.
 
 ```ts
-import { configureHttp } from 'vehicle-research';
+import { configureHttp } from 'vinplain';
 
 configureHttp({
   defaultTimeoutMs: 15_000,
@@ -141,62 +165,41 @@ configureHttp({
 });
 ```
 
-## Errors and limitations
+## Companions
 
-- Network, timeout, and non-2xx responses resolve to `null`; the package does not throw for a failed source.
-- US-market data only. NHTSA and EPA do not cover every global vehicle.
-- The ISO 3779 check digit is authoritative for North American VINs. Elsewhere, position nine is often filler, so a failing digit is reported rather than treated as a bad read.
-- Recalls are capped at 50 campaigns per vehicle.
-- No listings, pricing, history reports, valuations, or auction data.
-- Government APIs can be slow and rate-limited. Cache results; do not hammer them.
-- This is not a substitute for a professional inspection or a manufacturer's service information.
+[`expo-vin-ocr`](expo-vin-ocr/) reads a VIN from a photo with Apple Vision, on device, and returns a validated candidate from `vinplain`. iOS 16+, Expo SDK 52+, development build or prebuild. Not part of the core package.
 
-## Optional companion: expo-vin-ocr
+## Documentation
 
-The repository also contains [`expo-vin-ocr`](expo-vin-ocr/), an iOS-only Expo module that reads a VIN from a photo with Apple Vision and returns a validated candidate. It is not part of the core package, has its own README, and does not run in Expo Go. Android is not supported.
+- [Market positioning and competitor research](docs/market.md)
+- [Publishing and trusted publishing](docs/PUBLISHING.md)
+- [Contributing](CONTRIBUTING.md)
+- [Security policy](SECURITY.md)
+- [Changelog](CHANGELOG.md)
 
 ## Testing
 
-Deterministic tests use the response shapes confirmed against the live APIs. They do not call the network.
-
 ```bash
-npm test        # 30 tests
-npm run typecheck
-npm run build
+npm test        # 34 deterministic tests
+npm run test:live   # 4 live integration tests
+npm run check   # typecheck + tests + build
 ```
 
-The opt-in integration check calls the real services:
-
-```bash
-npm run test:live   # 4 tests
-```
-
-CI runs the deterministic suite on Node 22 and 24. The live check is not part of CI because government APIs throttle.
-
-## Versioning
-
-Pre-1.0. Minor versions may change the API. Types and return semantics are treated as the contract; internal helpers are not exported.
-
-## Contributing
-
-See [CONTRIBUTING.md](CONTRIBUTING.md). Bug reports with a failing fixture are more useful than a general report. Do not include VINs that belong to other people.
-
-## Security
-
-See [SECURITY.md](SECURITY.md). Do not open a public issue for a vulnerability.
+The deterministic suite mocks `fetch` with response shapes confirmed against the live services. The live suite is opt-in and not run in CI because government APIs throttle.
 
 ## License
 
 MIT. See [LICENSE](LICENSE).
 
-The package calls US federal data sources; it does not relicense their data.
-
 ## Status
 
 | | |
 | --- | --- |
-| Tests | 30 deterministic, 4 live |
+| Version | 0.2.0 |
+| npm | **Pending** — no registry credentials configured |
+| GitHub release | v0.2.0 |
 | Runtime dependencies | 0 |
 | Node | 18+ |
-| Package name | `vehicle-research` (available on npm as of 2026-10-26) |
-| Alternative scope | `@qadanm/vehicle-research` |
+| Tests | 34 deterministic, 4 live, 3 OCR |
+
+The package is pre-1.0. Minor versions may change the API.

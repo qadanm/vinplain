@@ -5,7 +5,7 @@ export default defineConfig({
   resolve: {
     alias: {
       'expo-modules-core': path.resolve(__dirname, 'tests/mocks/expo-modules-core.ts'),
-      'vehicle-research': path.resolve(__dirname, '../src/index.ts'),
+      'vinplain': path.resolve(__dirname, '../src/index.ts'),
     },
   },
   test: {

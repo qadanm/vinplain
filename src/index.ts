@@ -1,5 +1,5 @@
 /**
- * vehicle-research
+ * vinplain
  *
  * Public data sources only: NHTSA vPIC, NHTSA recalls/complaints/NCAP, and
  * the US Department of Energy fuel-economy API. No API keys, no app code,
@@ -12,6 +12,9 @@ export type { CacheBackend, CacheEnvelope } from './cache';
 export { configureHttp, fetchJson, cachedJson } from './http';
 
 export { decodeVin, lookupComplaints, mapVpicRow } from './nhtsa';
+
+export { getVehicleSummary } from './summary';
+export type { VehicleSummary, VehicleSummaryInput, SectionStatus } from './summary';
 
 export {
   getYears,

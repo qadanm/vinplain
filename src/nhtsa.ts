@@ -191,7 +191,7 @@ export async function decodeVin(vin: string): Promise<VehicleSpecs | null> {
   // the known car instead of collapsing to "couldn't decode" (or worse, an
   // empty report). An unusable decode (mapVpicRow → null) is not cached, so a
   // real failure is never frozen as undecodable.
-  return cachedJson<VehicleSpecs>(`vehicle-research:decode:v1:${cleaned}`, 30 * DAY, async () => {
+  return cachedJson<VehicleSpecs>(`vinplain:decode:v1:${cleaned}`, 30 * DAY, async () => {
     const url = `${VPIC_BASE}/DecodeVinValuesExtended/${encodeURIComponent(cleaned)}?format=json`;
     const data = await fetchJson<{ Results?: VPicDecodeRow[] }>(url);
     const row = data?.Results?.[0];

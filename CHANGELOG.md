@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.2.0 — 2026-10-26
+
+Renamed to vinplain.
+
+- New identity and README: "The public record, in plain code."
+- Adds `getVehicleSummary()` with per-section status.
+- Adds the `vinplain` CLI, including `--json`.
+- Adds a release workflow for npm provenance.
+- Cache keys move to the `vinplain:` namespace.
+
 ## 0.1.2 — 2026-10-26
 
 Build automatically before packing, so a clean checkout cannot publish an empty `dist`.

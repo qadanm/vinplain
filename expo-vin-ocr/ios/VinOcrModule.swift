@@ -10,7 +10,7 @@ import UIKit
 
  The module deliberately returns *raw recognized text* rather than trying to
  pick a VIN. Selection, normalization, OCR-confusion repair, and check-digit
- validation live in the TypeScript layer (`vehicle-research`). Vision's only
+ validation live in the TypeScript layer (`vinplain`). Vision's only
  job is to read characters off the glass.
  */
 public class VinOcrModule: Module {

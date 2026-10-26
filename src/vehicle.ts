@@ -59,7 +59,7 @@ export const normalizeMake = (s: string): string => s.toLowerCase().replace(/[^a
 
 /** Passenger-vehicle makes, de-duped, prettified, filtered to consumer brands. Cached 30 days. */
 export async function getMakes(signal?: AbortSignal): Promise<string[]> {
-  const result = await cachedJson<string[]>('vehicle-research:makes:v2', 30 * DAY, async () => {
+  const result = await cachedJson<string[]>('vinplain:makes:v2', 30 * DAY, async () => {
     const [car, truck, mpv] = await Promise.all([
       fetchJson<{ Results?: VpicMakeRow[] }>(`${VPIC}/GetMakesForVehicleType/car?format=json`, { signal }),
       fetchJson<{ Results?: VpicMakeRow[] }>(`${VPIC}/GetMakesForVehicleType/truck?format=json`, { signal }),
@@ -87,7 +87,7 @@ interface VpicModelRow {
 
 /** Models for a make + year, merged across car/truck/mpv, sorted. Cached 7 days. */
 export async function getModels(make: string, year: number, signal?: AbortSignal): Promise<string[]> {
-  const key = `vehicle-research:models:v2:${make.toLowerCase()}:${year}`;
+  const key = `vinplain:models:v2:${make.toLowerCase()}:${year}`;
   const result = await cachedJson<string[]>(key, 7 * DAY, async () => {
     const base = `${VPIC}/GetModelsForMakeYear/make/${encodeURIComponent(make)}/modelyear/${year}`;
     const [car, truck, mpv] = await Promise.all([
@@ -230,7 +230,7 @@ export async function getRecallsDetailed(
   // read both as a confident zero. That published "0 NHTSA recalls" on a 2024
   // Model Y with five open campaigns and a 2020 F-150 with eleven. Ask every
   // candidate spelling now, and bump the key to evict the poisoned v3 entries.
-  const key = `vehicle-research:recalls:v4:${q.year}:${q.make.toLowerCase()}:${q.model.toLowerCase()}`;
+  const key = `vinplain:recalls:v4:${q.year}:${q.make.toLowerCase()}:${q.model.toLowerCase()}`;
   const res = await cachedJson<RecallCampaign[]>(key, DAY, async () => {
     const candidates = await nhtsaModelCandidates('r', q);
     let sawEmpty = false;
@@ -322,7 +322,7 @@ export async function getComplaints(
   // returns null here rather than a false zero, so complaints never invented a
   // clean record — but they did silently render "unavailable" for cars that
   // have thousands of filings, on exactly the nameplates recalls got wrong.
-  const key = `vehicle-research:complaints:v3:${q.year}:${q.make.toLowerCase()}:${q.model.toLowerCase()}`;
+  const key = `vinplain:complaints:v3:${q.year}:${q.make.toLowerCase()}:${q.model.toLowerCase()}`;
   return cachedJson<ComplaintSummary>(key, DAY, async () => {
     const candidates = await nhtsaModelCandidates('c', q);
     let emptyAnswer: ComplaintSummary | null = null;
@@ -344,7 +344,7 @@ export async function hasInvestigations(
   q: Pick<VehicleQuery, 'year' | 'make' | 'model'>,
 ): Promise<boolean> {
   if (!q.make || !q.model || !q.year) return false;
-  const key = `vehicle-research:invflag:v2:${q.year}:${q.make.toLowerCase()}:${q.model.toLowerCase()}`;
+  const key = `vinplain:invflag:v2:${q.year}:${q.make.toLowerCase()}:${q.model.toLowerCase()}`;
   const res = await cachedJson<{ v: boolean }>(key, DAY, async () => {
     const json = await fetchJson<{ results?: { model?: string }[] }>(
       `${NHTSA}/products/vehicle/models?modelYear=${q.year}&make=${encodeURIComponent(q.make)}&issueType=i`,
@@ -442,7 +442,7 @@ export async function getSafetyRatings(q: VehicleQuery): Promise<SafetyRating | 
   const hintKey = `${(q.driveHint ?? '').toLowerCase()}|${(q.bodyHint ?? '').toLowerCase()}`;
   // v5: back to the two crash stills NHTSA mirrors reliably. v4 carried video
   // URLs and a resolved-media pass; that was removed with the video feature.
-  const key = `vehicle-research:ncap:v5:${q.year}:${q.make.toLowerCase()}:${q.model.toLowerCase()}:${hintKey}`;
+  const key = `vinplain:ncap:v5:${q.year}:${q.make.toLowerCase()}:${q.model.toLowerCase()}:${hintKey}`;
   return cachedJson<SafetyRating>(key, 7 * DAY, async () => {
     const allUrl = `${NHTSA}/SafetyRatings/modelyear/${q.year}/make/${encodeURIComponent(q.make)}`;
     const all = await fetchJson<{ Results?: { Model?: string }[] }>(allUrl).catch(() => null);
@@ -613,7 +613,7 @@ async function fetchEpaVehicle(q: VehicleQuery): Promise<EpaResolution | null> {
     q.fuelHint ?? ''
   ).toLowerCase()}|${q.cylindersHint ?? ''}`;
   // v3: variant-aware model pick — EPA encodes drive/electrification in the name.
-  const key = `vehicle-research:epa:v3:${q.year}:${q.make.toLowerCase()}:${q.model.toLowerCase()}:${hintKey}`;
+  const key = `vinplain:epa:v3:${q.year}:${q.make.toLowerCase()}:${q.model.toLowerCase()}:${hintKey}`;
   return cachedJson<EpaResolution>(key, 7 * DAY, async () => {
     const modelMenu = await fetchJson<{ menuItem?: FeMenuItem | FeMenuItem[] }>(
       `${FE}/vehicle/menu/model?year=${q.year}&make=${encodeURIComponent(q.make)}`,
@@ -666,7 +666,7 @@ async function epaCombinedMpgRange(
 ): Promise<{ min: number; max: number } | undefined> {
   const list = candidates.slice(0, EPA_RANGE_MAX_VARIANTS);
   if (list.length < 2) return undefined;
-  const key = `vehicle-research:epa-range:v1:${q.year}:${q.make.toLowerCase()}:${q.model.toLowerCase()}`;
+  const key = `vinplain:epa-range:v1:${q.year}:${q.make.toLowerCase()}:${q.model.toLowerCase()}`;
   const range = await cachedJson<{ min: number; max: number }>(key, 7 * DAY, async () => {
     const mpgs = (
       await Promise.all(

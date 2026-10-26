@@ -1,7 +1,7 @@
 {
-  "name": "vehicle-research",
-  "version": "0.1.2",
-  "description": "Typed access to public US vehicle data: VIN validation, NHTSA recalls, complaints and crash ratings, and EPA fuel economy.",
+  "name": "vinplain",
+  "version": "0.2.0",
+  "description": "The public record, in plain code. Typed, keyless access to US vehicle data: VIN decode, NHTSA recalls, complaints, crash ratings, and EPA fuel economy.",
   "license": "MIT",
   "private": false,
   "type": "module",
@@ -17,6 +17,7 @@
   },
   "files": [
     "dist",
+    "bin",
     "README.md",
     "CHANGELOG.md",
     "LICENSE"
@@ -33,16 +34,20 @@
     "check": "npm run typecheck && npm test && npm run build",
     "test:live": "RUN_LIVE=1 vitest run tests/live.smoke.test.ts",
     "example": "npm run build && node examples/basic.mjs",
-    "prepack": "npm run build"
+    "prepack": "npm run build",
+    "cli": "node bin/vinplain.mjs"
   },
   "keywords": [
     "vin",
+    "vehicle",
     "nhtsa",
     "epa",
-    "vehicle",
+    "vpic",
     "recalls",
-    "obd",
-    "typescript"
+    "crash-ratings",
+    "fuel-economy",
+    "typescript",
+    "no-api-key"
   ],
   "devDependencies": {
     "@types/node": "^24.19.2",
@@ -52,10 +57,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/qadanm/vehicle-research.git"
+    "url": "git+https://github.com/qadanm/vinplain.git"
   },
-  "homepage": "https://github.com/qadanm/vehicle-research#readme",
+  "homepage": "https://github.com/qadanm/vinplain#readme",
   "bugs": {
-    "url": "https://github.com/qadanm/vehicle-research/issues"
+    "url": "https://github.com/qadanm/vinplain/issues"
+  },
+  "bin": {
+    "vinplain": "bin/vinplain.mjs"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
   }
 }
