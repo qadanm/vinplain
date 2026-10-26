@@ -12,6 +12,8 @@
 
 `vinplain` reads the public record for a VIN: the factory decode, recall campaigns, owner complaints, crash-test ratings, and fuel economy. It calls NHTSA's vPIC and safety APIs and the Department of Energy's fuel-economy API directly. It needs no API key and charges no per-lookup fee.
 
+[Website](https://qadanm.github.io/vinplain/) · [npm](https://www.npmjs.com/package/vinplain) · [Case study](https://qadan.co/work/vinplain/)
+
 The package has no runtime dependencies. It runs on Node 18 or later, in browsers, and in edge runtimes that provide `fetch`.
 
 Use it when you need the public record inside an app, a marketplace, or a test suite without putting a vendor account in the path.
@@ -192,9 +194,9 @@ MIT. See [LICENSE](LICENSE).
 
 | | |
 | --- | --- |
-| Version | 0.2.2 |
-| npm | 0.2.2 |
-| GitHub release | v0.2.2 |
+| Version | 0.2.3 |
+| npm | 0.2.3 |
+| GitHub release | v0.2.3 |
 | Runtime dependencies | 0 |
 | Node | 18 or later |
 | Tests | 34 deterministic, 4 live, 3 OCR |

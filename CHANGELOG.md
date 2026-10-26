@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.3 (2026-10-26)
+
+Point the package homepage at the product site and publish the README with the site and case-study links. No API changes.
+
 ## 0.2.2 (2026-10-26)
 
 Move provenance from `publishConfig` to the release workflow. Provenance requires a CI provider with OIDC, so a local publish cannot generate it.
